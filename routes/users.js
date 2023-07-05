@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 
 const generateJWT = ({id}) => {
   const {JWT_SECREAT, JWT_EXPIRSEDAY} = process.env;
-  console.log(JWT_SECREAT, JWT_EXPIRSEDAY, id)
   const token = jwt.sign({id}, JWT_SECREAT, {
     expiresIn: JWT_EXPIRSEDAY
   });
@@ -16,7 +15,7 @@ const generateJWT = ({id}) => {
 /* GET users listing. */
 router.get('/',checkIfLogin ,function(req, res, next) {
   res.status(200).json({
-    message:'登入成功'
+    message:'驗證成功，可使用會員功能'
   });
 });
 router.get('/login' ,function(req, res, next) {
