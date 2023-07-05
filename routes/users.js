@@ -2,10 +2,15 @@ var checkIfLogin = require('../middleware/checkIfLogin')
 
 var express = require('express');
 var router = express.Router();
-const generateJWT = (user, statuscode, res) => {
-  const token = jwt.sign({id: user.id}, process.env.JWT_SECREAT, {
-    expirseIn: process.env.JWT_EXPIRSEDAY
+const jwt = require('jsonwebtoken');
+
+const generateJWT = ({id}) => {
+  const {JWT_SECREAT, JWT_EXPIRSEDAY} = process.env;
+  console.log(JWT_SECREAT, JWT_EXPIRSEDAY, id)
+  const token = jwt.sign({id}, JWT_SECREAT, {
+    expiresIn: JWT_EXPIRSEDAY
   });
+  return token
 };
 
 /* GET users listing. */
@@ -16,13 +21,17 @@ router.get('/',checkIfLogin ,function(req, res, next) {
 });
 router.get('/login' ,function(req, res, next) {
   const {email, password} = req.query;
+  const token = generateJWT({
+    id: email
+  })
   const data = {
     email,
     password,
     env:{
       secreat: process.env.JWT_SECREAT,
       expirsday: process.env.JWT_EXPIRSEDAY
-    }
+    },
+    token
   }
   res.status(200).json({
     message:'登入成功',
