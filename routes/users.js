@@ -23,12 +23,15 @@ router.get('/login' ,function(req, res, next) {
   const token = generateJWT({
     id: email
   })
+  let date = new Date().toJSON();
   const data = {
-    email,
-    password,
-    env:{
-      secreat: process.env.JWT_SECREAT,
-      expirsday: process.env.JWT_EXPIRSEDAY
+    message: 'login sucess',
+    user: {
+      id: '1',
+      email,
+      email_verified_at: null,
+      created_at: date,
+      updated_at: date
     },
     token
   }

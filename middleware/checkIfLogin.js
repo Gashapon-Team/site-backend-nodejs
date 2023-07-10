@@ -8,7 +8,7 @@ const checkIfLogin = function(req, res, next) {
 
   try {
     let decode = jwt.verify(token, JWT_SECREAT)
-    console.log('decode', decode)
+    // console.log('decode', decode)
     if(decode !== null) next()
   } catch (error) {
     if(error instanceof jwt.TokenExpiredError) { 
