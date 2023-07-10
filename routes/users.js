@@ -13,13 +13,13 @@ const generateJWT = ({id}) => {
 };
 
 /* GET users listing. */
-router.get('/',checkIfLogin ,function(req, res, next) {
+router.post('/',checkIfLogin ,function(req, res, next) {
   res.status(200).json({
     message:'驗證成功，可使用會員功能'
   });
 });
-router.get('/login' ,function(req, res, next) {
-  const {email, password} = req.query;
+router.post('/login' ,function(req, res, next) {
+  const {email} = req.query;
   const token = generateJWT({
     id: email
   })

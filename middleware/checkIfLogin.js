@@ -22,9 +22,7 @@ const checkIfLogin = function(req, res, next) {
 }
 const logFail = function(res, token, decode) {
   res.status(200).json({
-    message: '登入失敗，請重新嘗試',
-    token,
-    decode
+    message: '登入失敗，請重新嘗試'
   })
 }
 
