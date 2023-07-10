@@ -40,5 +40,21 @@ router.post('/login' ,function(req, res, next) {
     data
   });
 });
+router.post('/register', function(req, res, next){
+  const {name, email, password, c_password} = req.query;
+  const token = generateJWT({
+    id: email
+  })
+  res.status(200).json({
+    message: '註冊成功',
+    data:{ 
+      name,
+      email,
+      password,
+      c_password,
+      token
+    }
+  })
+})
 
 module.exports = router;
