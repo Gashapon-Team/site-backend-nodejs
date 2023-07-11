@@ -3,6 +3,14 @@ var checkIfLogin = require('../middleware/checkIfLogin')
 var express = require('express');
 var router = express.Router();
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose')
+
+mongoose.connect(`mongodb+srv://shanghuang:${process.env.MONGO_PASSWORD}@cluster0.hrkx1.mongodb.net/`)
+.then(response=>{
+  console.log(response,'成功連結到db')
+}).catch(error=>{
+  console.log(error,'db連線失敗')
+})
 
 const generateJWT = ({id}) => {
   const {JWT_SECREAT, JWT_EXPIRSEDAY} = process.env;
